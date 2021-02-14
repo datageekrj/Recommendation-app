@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Courses</title>
+    <style>
+                a{
+            background-color: red;
+            box-shadow: 0 5px 0 darkred;
+            color: white;
+            padding: 1em 1.5em;
+            position: absolute;
+            text-decoration: none;
+            text-transform: uppercase;
+            right:0px;
+            top: 0px;
+        }
+
+        a:hover{
+            background-color: #ce0606;
+            cursor: pointer;
+        }
+
+        a:active{
+            box-shadow:none;
+            top: 5px;
+
+        }
+        input[type=text]{
+            display: flex;
+            width: 500px;
+            height: 100px;
+            margin: 10px;
+            padding: 5px;
+            background-color: darkturquoise;
+            outline: none;
+            border: none;
+        }
+
+        input[type=submit]{
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            background-color: gold;
+            height: 35px;
+            font-size: 1.1em;
+            padding: 0px 5px 0px 5px;
+            box-shadow: 0 2px 0 darkorange;
+            outline: none;
+            width: 300px;
+            position: absolute;
+            left: 100px;
+        }
+        input[type=submit]:hover{
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>
+    <a href={{url_for("home")}}>Go back to Home</a>
+    {% if title %}
+        <p>The new course named: {{title}} has been added to the database. </p>
+    {% else %}
+    <form method="POST">
+        <input type="text" name="title" placeholder="Enter the title of the course: " required>
+        <input type="text" name="desc" placeholder="Enter the description of the course: " required>
+        <input type="submit" required>
+    </form>
+    {% endif %}
+</body>
+</html>

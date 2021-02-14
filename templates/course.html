@@ -1,0 +1,53 @@
+<style>
+            a{
+            background-color: red;
+            box-shadow: 0 5px 0 darkred;
+            color: white;
+            padding: 1em 1.5em;
+            position: relative;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        a:hover{
+            background-color: #ce0606;
+            cursor: pointer;
+        }
+
+        a:active{
+            box-shadow:none;
+            top: 5px;
+
+        }
+        li{
+            background-color: floralwhite;
+        }
+        input[type=submit]{
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            background-color: gold;
+            height: 35px;
+            font-size: 1.1em;
+            padding: 0px 5px 0px 5px;
+            box-shadow: 0 2px 0 darkorange;
+            outline: none;
+        }
+        input[type=submit]:hover{
+            background-color: yellow;
+        }
+</style>
+
+<a href={{url_for("home")}}>Go back to Home</a>
+<p style="margin-top:20px;margin-bottom: 20px;">Click here to add new Course: </p>
+<a href={{url_for('add_course')}}>Add New Courses</a>
+<p style="margin-top:20px">Here is the list of courses: </p>
+{% for column in range(data.shape[0]) %}
+    <ol>
+        <li>{{ data["description"][column] }}</li>
+        <form method="POST">
+            <input type="number" name={{data["id"][column]}} style="display:none;" value={{data["id"][column]}}>    
+            <input type="submit" value="Delete This Course">
+        </form>
+    </ol>
+{% endfor %}

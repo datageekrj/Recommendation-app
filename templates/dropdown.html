@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Recommendations</title>
+    <style>
+        body {
+  margin: 0;
+  padding: 0;
+  background-color: #004882;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.box select {
+  background-color: #0563af;
+  color: white;
+  padding: 12px;
+  width: 400px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+.box::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.box:hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.box select option {
+  padding: 30px;
+}
+
+#submit{
+    position: absolute;
+    top: 65%;
+    left: 43%;
+    width: 15%;
+    height: 5%;
+    background-color: orange;
+    color: white;
+    font-size: 18px;
+    border:none;
+    outline: none;
+}
+
+#submit:hover{
+    background-color: orangered;
+}
+.results{
+    color: white;
+    font-size: 20px;
+    
+}
+a{
+            background-color: red;
+            box-shadow: 0 5px 0 darkred;
+            color: white;
+            padding: 1em 1.5em;
+            position: absolute;
+            text-decoration: none;
+            text-transform: uppercase;
+            right:0px;
+            top: 0px;
+    
+        }
+
+        a:hover{
+            background-color: #ce0606;
+            cursor: pointer;
+        }
+
+        a:active{
+            box-shadow:none;
+            top: 5px;
+
+        }
+
+        input[type=number]{
+          position: absolute;
+          top: 55%;
+          width: 400px;
+          left: 37%;
+          height: 40px;
+          outline: none;
+          border: none;
+          background-color:#0563AF ;
+        }
+
+        input[type=number]::placeholder{
+          color:white;
+          font-size: 20px;
+          padding: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+  <img src="https://ernesto.net/wp-content/uploads/2020/11/ernesto-logo-205x46-1.png">
+  <a href={{url_for("home")}} style="color: white;">Go back to Home</a>
+    {% if results %}
+    <div class="results">
+        <p>Here are the Recommendations for the chosen course : {{name}} </p>
+
+        {% for key in results.keys() %}
+            <ul>
+                <li>{{key}} : {{results[key]}}</li>
+            </ul>
+
+        {% endfor %}
+    </div>
+    {% else %}
+    <form method="POST">
+        <div class="box">
+            <select name="course">
+              {% for course_name in data %}
+                <option value="{{course_name}}">{{course_name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <input type="number" name="number" placeholder="# of Recommendations" style="color: white;" required>
+          <input type="submit" id="submit">
+    </form>  
+    {% endif %}  
+</body>
+</html>
